@@ -26,19 +26,9 @@ for row in ind_opt.data:
 
 header = st.container()
 form = st.form(key='form2',clear_on_submit=True)
-
-
-with header:
-    st.title('Welcome to AIDETIC')
-    st.text('please fill the details.')
-with form:
-    name = st.text_input('Name')
-    email = st.text_input('Email')
-    company_name = st.text_input('Company Name')
-    url = st.text_input('URL')
-    industry = st.selectbox('Select the industry',options=opt1)
+def options(a):
     for row in ind_opt.data:
-        if row['name'] == industry:
+        if row['name'] == a:
             us = row['id']
     us_id = []
     for k in ind_use_map.data:
@@ -51,7 +41,21 @@ with form:
             if j['id'] == i:
                 id2 = j['name']
                 fin_opt.append(id2)
-    use_cases = st.multiselect('Select the use-cases',options=fin_opt)
+    return fin_opt
+
+
+with header:
+    st.title('Welcome to AIDETIC')
+    st.text('please fill the details.')
+
+    name = st.text_input('Name')
+    email = st.text_input('Email')
+    company_name = st.text_input('Company Name')
+    url = st.text_input('URL')
+    industry = st.selectbox('Select the industry',options=opt1)
+    opt1 = options(industry)
+    use_cases = st.multiselect('Select the use-cases',options=opt1)
+with form:
     submit = st.form_submit_button('submit')
 
     if submit:
