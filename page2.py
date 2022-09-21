@@ -14,9 +14,8 @@ def init_connection():
 
 supabase = init_connection()
 
-#resume_path = r'C:\Users\Sandeep\Desktop\Resume'
 
-s3 = boto3.client("s3", aws_access_key_id=st.secrets['AWS_ACCESS_KEY_ID'], aws_secret_access_key=st.secrets['AWS_SECRET_ACCESS_KEY'])
+s3 = boto3.client("s3", aws_access_key_id=st.secrets['AWS_ACCESS_KEY_ID'],aws_secret_access_key=st.secrets['AWS_SECRET_ACCESS_KEY'])
 
 
 tf = supabase.table("tools_frameworks").select("*").execute()
@@ -41,6 +40,7 @@ with form:
         app_opt.append(j['name'])
     app = st.multiselect('Select the Application of AI',options=app_opt)
     uploaded_file = st.file_uploader('please upload your resume')
+    st.write(uploaded_file)
     submit = st.form_submit_button("Submit")
     
     
@@ -55,10 +55,13 @@ with form:
             s3 = boto3.resource('s3')
             bucket_name = 'datasciencehiring'
             object_name = resume_file_name
-            file_name = os.path.join(pathlib.Path(__file__).parent.resolve(), resume_file_name) #os.path.join(resume_path, resume_file_name) 
             bucket = s3.Bucket(bucket_name)
-            file_path = bucket.upload_file(file_name, object_name)
+            file_name = f'resume/{resume_file_name}'
+            with open(file_name, 'wb') as f:
+                f.write(uploaded_file.getbuffer())
+            bucket.upload_file(file_name, object_name)
             url = f'''https://{bucket_name}.s3.amazonaws.com/{urllib.parse.quote(resume_file_name, safe="~()*!.'")}'''
     
         dict1['resume_link'] = url 
+        st.write(url)
         supabase.table('candidate_details').insert(dict1).execute()
