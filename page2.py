@@ -40,7 +40,6 @@ with form:
         app_opt.append(j['name'])
     app = st.multiselect('Select the Application of AI',options=app_opt)
     uploaded_file = st.file_uploader('please upload your resume')
-    st.write(uploaded_file)
     submit = st.form_submit_button("Submit")
     
     
@@ -63,5 +62,4 @@ with form:
             url = f'''https://{bucket_name}.s3.amazonaws.com/{urllib.parse.quote(resume_file_name, safe="~()*!.'")}'''
     
         dict1['resume_link'] = url 
-        st.write(url)
         supabase.table('candidate_details').insert(dict1).execute()
