@@ -2,4 +2,4 @@ streamlit
 supabase
 boto3
 pathlib
-urllib
+urllib3
