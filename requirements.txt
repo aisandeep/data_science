@@ -1,2 +1,5 @@
 streamlit
 supabase
+boto3
+pathlib
+urllib
