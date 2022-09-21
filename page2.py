@@ -1,6 +1,10 @@
+import secrets
 import streamlit as st
 from supabase import create_client, Client
 import os
+import boto3
+import pathlib
+import urllib
 
 @st.experimental_singleton
 def init_connection():
@@ -9,6 +13,11 @@ def init_connection():
     return create_client(url,key)
 
 supabase = init_connection()
+
+#resume_path = r'C:\Users\Sandeep\Desktop\Resume'
+
+s3 = boto3.client("s3", aws_access_key_id=st.secrets['AWS_ACCESS_KEY_ID'], aws_secret_access_key=st.secrets['AWS_SECRET_ACCESS_KEY'])
+
 
 tf = supabase.table("tools_frameworks").select("*").execute()
 ai_br = supabase.table("AI_branches").select("*").execute()
@@ -19,9 +28,6 @@ for i in tf.data:
     
 header = st.container()
 form = st.form(key='form1',clear_on_submit=True)
-
-resume_path = r'C:\Users\Sandeep\Desktop\Aidetic\data_science\resume'
-
 
 with header:
     st.title('Welcome to AIDETIC')
@@ -45,10 +51,14 @@ with form:
         dict1['tools_frameworks'] = tools
         dict1['applications_ai'] = app
         if uploaded_file is not None:
-            file_name = uploaded_file.name
-            new_path = os.path.join(resume_path,file_name)
-            with open(new_path, 'wb') as f:
-                f.write(uploaded_file.getbuffer())
-            
-        dict1['resume'] = new_path
+            resume_file_name = uploaded_file.name
+            s3 = boto3.resource('s3')
+            bucket_name = 'datasciencehiring'
+            object_name = resume_file_name
+            file_name = os.path.join(pathlib.Path(__file__).parent.resolve(), resume_file_name) #os.path.join(resume_path, resume_file_name) 
+            bucket = s3.Bucket(bucket_name)
+            file_path = bucket.upload_file(file_name, object_name)
+            url = f'''https://{bucket_name}.s3.amazonaws.com/{urllib.parse.quote(resume_file_name, safe="~()*!.'")}'''
+    
+        dict1['resume_link'] = url 
         supabase.table('candidate_details').insert(dict1).execute()
