@@ -1,5 +1,10 @@
 streamlit
 supabase
-boto3
 pathlib
-urllib3
+urllib
+boto3
+pandas
+spacy
+fitz
+PyMuPDF
+spacy-transformers
