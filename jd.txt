@@ -1,0 +1,36 @@
+AIDETIC SOFTWARE PVT. LTD
+CIN - U72900OR2018PTC029345
+107/2445, Sishupalgarh           
+Bhubaneswar - 751002
+Odisha, India
+Title:
+Data Scientist
+Location:
+Bengaluru, Karnataka.
+About us:
+    We are an emerging Artificial Intelligence-based startup trying to cater to the needs of industries that employ cutting-edge technologies for their operations. Currently, we are into and provide services to disruptive sectors such as drone tech, video surveillance, human-computer interaction, etc. In general, we believe that AI has the ability to shape the future of humanity and we aim to work towards spearheading this transition.
+About the role:
+We are looking for a highly motivated data scientist with a strong algorithmic mindset and problem-solving propensity.
+Since we are operating in a highly competitive market, every opportunity to increase efficiency and cut costs is critical and the candidate should have an eye for such opportunities. We are constantly innovating – working on novel hardware and software – so a high level of flexibility and celerity in learning is expected.
+Experience:
+2-4 years of experience
+Responsibilities:
+Design machine learning / deep learning models for products and client projects.
+Creating and managing data pipelines.
+Exploring new SOTA models and data handling techniques.
+Coordinate with software development teams to implement models and monitor outcomes.
+Develop processes and tools to monitor and analyze model performance and data accuracy.
+Explore new promising technology and implement it to create awesome stuff.
+Technology stack:
+Must have:
+Python
+Pandas, Numpy
+Tensorflow, Pytorch
+Sklearn
+Good to have:
+Scipy
+Opencv
+Spacy, NLTK
+What’s in it for you:
+Opportunity to work on a lot of new cutting-edge technologies: We promise you rapid growth on your skillset by providing you with a steep learning curve.
+Opportunity to work closely with our experienced founding members who are experts in developing scalable practical AI products and software architecture development.
