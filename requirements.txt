@@ -1,7 +1,7 @@
 streamlit
 supabase
 pathlib
-urllib
+urllib3
 boto3
 pandas
 spacy
